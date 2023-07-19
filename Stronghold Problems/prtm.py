@@ -3,7 +3,7 @@
 def weightedAlph(p: str) -> float:
     """Given: A protein string P of length at most 1000 aa. 
     Return: The total weight of P."""
-    def prots(codon: list) -> list:
+    def prots(codon: str) -> list:
         match codon:
             case "A":
                 return 71.03711
@@ -46,9 +46,16 @@ def weightedAlph(p: str) -> float:
 
     def translation(mrna):
         result = [prots(i) for i in mrna]
-        return sum([int(elem) for elem in result])
+        result = [i for i in result if i is not None]
+        print(result)
+        return sum([float(elem) for elem in result])
     
-    return translation(prots(p))
+    return translation(p)
 
-example = "SKADYEK"
-print(weightedAlph(example))
+#example = "SKADYEK"
+#print(weightedAlph(example))
+
+
+f = open("rosalind_prtm.txt", "r")
+
+print(weightedAlph(f.read()))
